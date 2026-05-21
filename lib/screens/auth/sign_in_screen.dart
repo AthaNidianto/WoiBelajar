@@ -133,7 +133,6 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
                   ),
 
-                  const SizedBox(height: 20),
 
                   Align(
                     alignment: Alignment.centerRight,
@@ -145,13 +144,34 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 20),
+
+                  const SizedBox(height: 34),
 
                 CustomButton(text: 'Sign In', onPressed: () {}),
 
-                  const Row(
+                const SizedBox(height: 20),
+
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [],
+                    children: [
+                      Text(
+                        "Don't have an account? ",
+                        style: TextStyle(color: Colors.grey),
+                        
+                      ),
+                      GestureDetector(
+                        onTap: () {
+
+                        },
+                        child: Text(
+                          'Create Account',
+                          style: TextStyle(
+                            color: primaryBlue,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      )
+                    ],
                   ),
                 ],
               ),
