@@ -28,14 +28,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+  final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       backgroundColor: bgColor,
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          return SingleChildScrollView(
-            child: ConstrainedBox(
-              constraints: BoxConstraints(minHeight: constraints.maxHeight),
-              child: IntrinsicHeight(
+      body: SingleChildScrollView(
+            child: SizedBox(
+              height: screenHeight,
                 child: Column(
                   children: [
                     Expanded(
@@ -162,7 +162,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 40),
+                            const SizedBox(height: 120),
                           ],
                         ),
                       ),
@@ -202,9 +202,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
               ),
             ),
-          );
-        },
-      ),
-    );
+      );
   }
 }
