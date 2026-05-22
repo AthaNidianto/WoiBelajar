@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:woibelajar/core/constant.dart';
+import 'package:woibelajar/routes/routes.dart';
 import 'package:woibelajar/widgets/custom_button.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -10,13 +12,15 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  final TextEditingController _fullNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  
-  bool _passwordVisible = false; 
+
+  bool _passwordVisible = false;
 
   @override
   void dispose() {
+    _fullNameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
@@ -26,128 +30,180 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: bgColor,
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 26),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Center(
-                    child: RichText(
-                      text: const TextSpan(
-                        style: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.normal,
-                          color: textColor,
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          return SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(minHeight: constraints.maxHeight),
+              child: IntrinsicHeight(
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 30),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const SizedBox(height: 60),
+                            Center(
+                              child: RichText(
+                                text: const TextSpan(
+                                  style: TextStyle(
+                                    fontSize: 28,
+                                    fontWeight: FontWeight.normal,
+                                    color: textColor,
+                                  ),
+                                  children: [
+                                    TextSpan(
+                                      text: 'Create',
+                                      style: TextStyle(color: primaryBlue),
+                                    ),
+                                    TextSpan(text: ' Account'),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 5),
+                            const Center(
+                              child: Text(
+                                "Fill your details",
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 30),
+
+                            TextField(
+                              controller: _fullNameController,
+                              decoration: const InputDecoration(
+                                labelText: 'Full Name',
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.grey),
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: primaryBlue),
+                                ),
+                              ),
+                            ),
+
+                            const SizedBox(height: 20),
+
+                            TextField(
+                              controller: _emailController,
+                              decoration: const InputDecoration(
+                                labelText: 'Email',
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.grey),
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: primaryBlue),
+                                ),
+                              ),
+                            ),
+
+                            const SizedBox(height: 20),
+
+                            TextField(
+                              controller: _passwordController,
+                              obscureText: !_passwordVisible,
+                              decoration: InputDecoration(
+                                labelText: 'Password',
+                                enabledBorder: const UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.grey),
+                                ),
+                                focusedBorder: const UnderlineInputBorder(
+                                  borderSide: BorderSide(color: primaryBlue),
+                                ),
+                                suffixIcon: IconButton(
+                                  icon: Icon(
+                                    _passwordVisible
+                                        ? Icons.visibility
+                                        : Icons.visibility_off,
+                                    color: Colors.grey,
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      _passwordVisible = !_passwordVisible;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 48),
+
+                            CustomButton(text: 'Sign Up', onPressed: () {}),
+
+                            const SizedBox(height: 20),
+
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Text(
+                                  "Already have an account? ",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    context.pushNamed(RouteName.signin.name);
+                                  },
+                                  child: const Text(
+                                    'Sign In',
+                                    style: TextStyle(
+                                      color: primaryBlue,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 40),
+                          ],
                         ),
+                      ),
+                    ),
+
+                    SizedBox(
+                      height: 250,
+                      child: Stack(
+                        clipBehavior: Clip.none,
                         children: [
-                          TextSpan(
-                            text: 'Create',
-                            style: TextStyle(color: primaryBlue),
+                          Container(
+                            width: double.infinity,
+                            height: 250,
+                            decoration: BoxDecoration(
+                              color: primaryBlue,
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(300),
+                                topRight: Radius.circular(150),
+                              ),
+                            ),
                           ),
-                          TextSpan(text: 'Account'),
+                          Positioned(
+                            top: -100,
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            child: Image.asset(
+                              'assets/images/BottomIconSignUp/djvmar1030111.webp',
+                              width: 448,
+                              height: 448,
+                            ),
+                          ),
                         ],
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 5),
-                  const Center(
-                    child: Text(
-                      "Enter your email and password",
-                      style: TextStyle(fontSize: 15, color: Colors.grey),
-                    ),
-                  ),
-                  const SizedBox(height: 30),
-
-                  TextField(
-                    controller: _emailController,
-                    decoration: const InputDecoration(
-                      labelText: 'Email',
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: primaryBlue),
-                      ),
-                    ),
-                  ),
-
-                  const SizedBox(height: 20),
-
-                  TextField(
-                    controller: _passwordController, 
-                    obscureText: !_passwordVisible, 
-                    decoration: InputDecoration(
-                      labelText: 'Password',
-                      enabledBorder: const UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey),
-                      ),
-                      focusedBorder: const UnderlineInputBorder(
-                        borderSide: BorderSide(color: primaryBlue),
-                      ),
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          _passwordVisible ? Icons.visibility : Icons.visibility_off,
-                          color: Colors.grey,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            _passwordVisible = !_passwordVisible;
-                          });
-                        },
-                      ),
-                    ),
-                  ),
-
-
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
-                      onPressed: () {},
-                      child: const Text(
-                        'Forgot Password?',
-                        style: TextStyle(color: primaryBlue),
-                      ),
-                    ),
-                  ),
-
-                  const SizedBox(height: 34),
-
-                CustomButton(text: 'Sign Up', onPressed: () {}),
-
-                const SizedBox(height: 20),
-
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Don't have an account? ",
-                        style: TextStyle(color: Colors.grey),
-                        
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(context, '/signin');
-                        },
-                        child: Text(
-                          'Create Account',
-                          style: TextStyle(
-                            color: primaryBlue,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

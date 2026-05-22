@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:woibelajar/core/constant.dart';
+import 'package:woibelajar/routes/routes.dart';
 import 'package:woibelajar/widgets/custom_button.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -161,7 +163,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Navigator.pop(context);
+                          context.pushNamed(RouteName.signup.name);
                         },
                         child: Text(
                           'Create Account',
