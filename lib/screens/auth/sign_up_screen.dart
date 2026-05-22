@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:woibelajar/core/constant.dart';
 import 'package:woibelajar/widgets/custom_button.dart';
 
-class SignInScreen extends StatefulWidget {
-  const SignInScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<SignInScreen> createState() => _SignInScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _SignInScreenState extends State<SignInScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   
@@ -30,36 +30,6 @@ class _SignInScreenState extends State<SignInScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
-              height: 320,
-              child: Stack(
-                clipBehavior: Clip.none,
-                children: [
-                  Container(
-                    width: double.infinity,
-                    height: 250,
-                    decoration: const BoxDecoration(
-                      color: primaryBlue,
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(100),
-                        bottomRight: Radius.circular(100),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    top: 35,
-                    left: 25,
-                    right: 50,
-                    child: Image.asset(
-                      'assets/images/image3.webp',
-                      width: 298,
-                      height: 299,
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-                ],
-              ),
-            ),
             const SizedBox(height: 26),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -76,10 +46,10 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                         children: [
                           TextSpan(
-                            text: 'Hello',
+                            text: 'Create',
                             style: TextStyle(color: primaryBlue),
                           ),
-                          TextSpan(text: ' Again!'),
+                          TextSpan(text: 'Account'),
                         ],
                       ),
                     ),
@@ -147,7 +117,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
                   const SizedBox(height: 34),
 
-                CustomButton(text: 'Sign In', onPressed: () {}),
+                CustomButton(text: 'Sign Up', onPressed: () {}),
 
                 const SizedBox(height: 20),
 
@@ -161,7 +131,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Navigator.pop(context);
+                          Navigator.pushNamed(context, '/signin');
                         },
                         child: Text(
                           'Create Account',
