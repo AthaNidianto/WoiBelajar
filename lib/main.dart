@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:woibelajar/core/constant.dart';
 import 'package:provider/provider.dart';
 import 'package:woibelajar/providers/timer_provider.dart';
-import 'package:woibelajar/screens/auth/sign_in_screen.dart';
-import 'package:woibelajar/screens/auth/sign_up_screen.dart';
+import 'package:woibelajar/routes/app_routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +17,8 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => TimerProvider()), 
       ],
-      child: MaterialApp(
+      child: MaterialApp.router(
+        routerConfig: appRoute,
         debugShowCheckedModeBanner: false,
         title: 'Woi Belajar',
         theme: ThemeData(
@@ -26,11 +26,6 @@ class MyApp extends StatelessWidget {
           primaryColor: primaryBlue,
           fontFamily: 'Poppins',
         ),
-        initialRoute: '/signup',
-        routes: {
-          '/signup': (context) => const SignUpScreen(),
-          '/signin': (context) => const SignInScreen(),
-        },
       ),
 
     );
