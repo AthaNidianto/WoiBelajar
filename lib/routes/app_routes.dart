@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:woibelajar/routes/routes.dart';
+import 'package:woibelajar/screens/auth/forgot_password_screen.dart';
 import 'package:woibelajar/screens/auth/sign_in_screen.dart';
 import 'package:woibelajar/screens/auth/sign_up_screen.dart';
 
@@ -16,5 +17,10 @@ final GoRouter appRoute = GoRouter(
       path: RouteName.signin.path,
       builder: (context, state) => const SignInScreen(),
     ),
+    GoRoute(
+      name: RouteName.forgotPassword.name,
+      path: RouteName.forgotPassword.path,
+      builder: (context, state) => const ForgotPasswordScreen(),
+    )
   ],
 );

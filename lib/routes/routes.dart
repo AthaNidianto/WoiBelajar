@@ -10,4 +10,5 @@ class RouteName {
 
   static const signup = Routes(name: 'signup', path: '/signup');
   static const signin = Routes(name: 'signin', path: '/signin');
+  static const forgotPassword = Routes(name: 'forgot_password', path: '/forgot-password');
 }
