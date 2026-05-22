@@ -139,7 +139,9 @@ class _SignInScreenState extends State<SignInScreen> {
                   Align(
                     alignment: Alignment.centerRight,
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        context.pushNamed(RouteName.forgotPassword.name);
+                      },
                       child: const Text(
                         'Forgot Password?',
                         style: TextStyle(color: primaryBlue),
